@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Anual de Tareas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="font-sans bg-gray-100 p-2 min-h-screen flex flex-col">
+    <div class="container bg-white/50 p-5 rounded-lg shadow-md w-full max-w-7xl mx-auto flex flex-col flex-grow backdrop-blur-sm">
+        <div class="calendar-nav flex justify-center items-center mb-5">
+            <button id="prev-year-btn" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-lg mx-2"><i class="fas fa-chevron-left"></i></button>
+            <h1 id="calendar-year" class="text-center text-3xl font-bold text-gray-800 m-0">Calendario 2025</h1>
+            <button id="next-year-btn" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-lg mx-2"><i class="fas fa-chevron-right"></i></button>
+            <button id="today-btn" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-lg mx-2"><i class="fas fa-calendar-day mr-2"></i>Hoy</button>
+        </div>
+        <div class="calendar-main-content flex flex-grow h-full">
+            <div id="month-list-container" class="flex-none w-52 pr-5 border-r border-gray-200 h-full flex flex-col"></div>
+            <div id="detailed-month-view" class="flex-grow pl-5 relative overflow-hidden h-full flex flex-col"></div>
+        </div>
+    </div>
+
+    <!-- Controles de Fondo de Pantalla -->
+    <div class="fixed bottom-5 right-5 bg-white p-4 rounded-lg shadow-lg flex flex-col items-center space-y-3">
+        <label for="wallpaper-upload" class="cursor-pointer bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-md text-sm">
+            <i class="fas fa-image mr-2"></i>Seleccionar Fondo
+            <input type="file" id="wallpaper-upload" accept="image/*" class="hidden">
+        </label>
+        <button id="clear-wallpaper-btn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm">
+            <i class="fas fa-times-circle mr-2"></i>Quitar Fondo
+        </button>
+    </div>
+
+    <!-- Modal para Añadir/Ver Tareas -->
+    <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white/50 p-6 rounded-lg shadow-xl w-11/12 max-w-md backdrop-blur-sm">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="modal-date" class="text-xl font-semibold text-gray-800"></h2>
+                <span class="close-btn text-gray-500 text-3xl cursor-pointer hover:text-gray-700"><i class="fas fa-times"></i></span>
+            </div>
+            <div id="tasks-for-day" class="mb-4 max-h-60 overflow-y-auto"></div>
+            <hr class="my-4">
+            <h3>Añadir Nueva Tarea</h3>
+            <input type="text" id="task-title-input" placeholder="Título de la tarea..." class="w-full p-2 border border-gray-300/50 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-gray-400/50 bg-white/50 backdrop-blur-sm" />
+            <textarea id="task-desc-input" placeholder="Descripción..." class="w-full p-2 border border-gray-300/50 rounded-md mb-3 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-gray-400/50 bg-white/50 backdrop-blur-sm"></textarea>
+            <select id="task-priority-input" class="w-full p-2 border border-gray-300/50 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gray-400/50 bg-white/50 backdrop-blur-sm">
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
+            <button id="save-task-btn" class="w-full py-2 px-4 bg-blue-100/50 text-gray-700 font-semibold rounded-md hover:bg-blue-200/50 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 shadow-lg"><i class="fas fa-save mr-2"></i>Guardar Tarea</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
